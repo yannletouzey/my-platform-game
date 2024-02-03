@@ -12,7 +12,9 @@ class Player {
   }
   update() {
     this.draw();
-    this.pos.y += this.vel.y;
+    if (this.pos.y + this.size.h <= canvas.height) {
+      this.pos.y += this.vel.y;
+    }
   }
 }
 export default Player;
