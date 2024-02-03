@@ -1,10 +1,10 @@
 const gravity = 0.5;
-
+let nbrUp = 0;
 class Player {
   constructor(ctx) {
-    this.pos = { x: 500, y: 100 };
     this.size = { w: 100, h: 100 };
-    this.vel = { x: 10, y: 10 };
+    this.pos = { x: 500, y: (canvas.height - 500) };
+    this.vel = { x: 10, y: 20 };
     this.ctx = ctx;
   }
   draw() {
@@ -14,9 +14,14 @@ class Player {
 
   update() {
     this.draw();
-    if (this.pos.y + this.size.h <= canvas.height) {
+    this.pos.x += this.vel.x;
+    // this.pos.y += this.vel.y;
+    if (this.pos.y + this.size.h + this.vel.y <= canvas.height) {
       this.pos.y += this.vel.y;
       this.vel.y += gravity;
+    } else {
+      this.vel.y = 0;
+      nbrUp = 0;
     }
   }
 }

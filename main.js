@@ -1,38 +1,16 @@
 import Platform from "./Platform";
+import Player from "./Player";
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const gravity = 2;
+
 let nbrUp = 0;
 const platform = new Platform(ctx, 500, canvas.height - 600, 1000, 50);
 
-class Player {
-  constructor() {
-    this.size = { w: 100, h: 100 };
-    this.pos = { x: 500, y: (canvas.height - 500) };
-    this.vel = { x: 10, y: 20 };
-  }
-  draw() {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
-  }
-
-  update() {
-    this.draw();
-    this.pos.x += this.vel.x;
-    // this.pos.y += this.vel.y;
-    if (this.pos.y + this.size.h + this.vel.y <= canvas.height) {
-      this.pos.y += this.vel.y;
-      this.vel.y += gravity;
-    } else {
-      this.vel.y = 0;
-      nbrUp = 0;
-    }
-  }
-}
-
-const player = new Player();
+const player = new Player(ctx);
 const keys = {
   up: {
     pressed: false
